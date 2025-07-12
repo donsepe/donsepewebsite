@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Resume</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Your Name</h1>
+            <p>Web Developer | Designer | Problem Solver</p>
+        </header>
+        
+        <section class="contact">
+            <h2>Contact</h2>
+            <p>Email: your.email@example.com</p>
+            <p>Phone: (555) 123-4567</p>
+            <p>LinkedIn: linkedin.com/in/yourname</p>
+        </section>
+        
+        <section class="experience">
+            <h2>Work Experience</h2>
+            <div class="job">
+                <h3>Job Title - Company Name</h3>
+                <p class="date">Jan 2020 - Present</p>
+                <ul>
+                    <li>Accomplishment or responsibility</li>
+                    <li>Accomplishment or responsibility</li>
+                    <li>Accomplishment or responsibility</li>
+                </ul>
+            </div>
+            <!-- Add more jobs as needed -->
+        </section>
+        
+        <section class="education">
+            <h2>Education</h2>
+            <div class="school">
+                <h3>Degree - School Name</h3>
+                <p class="date">Graduation Year</p>
+                <p>Description or achievements</p>
+            </div>
+        </section>
+        
+        <section class="skills">
+            <h2>Skills</h2>
+            <ul class="skill-list">
+                <li>Skill 1</li>
+                <li>Skill 2</li>
+                <li>Skill 3</li>
+                <li>Skill 4</li>
+            </ul>
+        </section>
+        
+        <footer class="cloudfront-info">
+            <p>This site is served from AWS CloudFront</p>
+            <p>Edge Location: <span id="edge-location">Checking...</span></p>
+        </footer>
+    </div>
+    
+    <script>
+        // Get CloudFront information
+        fetch(window.location.href, { method: 'HEAD' })
+            .then(response => {
+                // Extract CloudFront headers
+                const cfPop = response.headers.get('x-amz-cf-pop'); // This might be available in some configurations
+                
+                // If we can get the POP (Point of Presence), it gives us location info
+                if (cfPop) {
+                    // POP IDs are typically in format like "DFW3-C1" (Dallas)
+                    document.getElementById('edge-location').textContent = cfPop;
+                } else {
+                    document.getElementById('edge-location').textContent = 'Location info unavailable';
+                }
+            })
+            .catch(error => {
+                document.getElementById('edge-location').textContent = 'Error fetching data';
+                console.error('Error fetching CloudFront information:', error);
+            });
+    </script>
+</body>
+</html>
